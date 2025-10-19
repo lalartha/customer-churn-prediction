@@ -1,0 +1,2114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Churn Predictor - AI-Powered Customer Analytics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            /* Primitive Color Tokens */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-teal-800: rgba(41, 150, 161, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
+
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-red-400-rgb: 255, 84, 89;
+            --color-orange-500-rgb: 168, 75, 47;
+            --color-orange-400-rgb: 230, 129, 97;
+
+            /* Background color tokens */
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-bg-5: rgba(147, 51, 234, 0.08);
+            --color-bg-6: rgba(249, 115, 22, 0.08);
+            --color-bg-7: rgba(236, 72, 153, 0.08);
+            --color-bg-8: rgba(6, 182, 212, 0.08);
+
+            /* Semantic Color Tokens */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --color-warning: var(--color-orange-500);
+            --color-info: var(--color-slate-500);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+            /* Typography */
+            --font-family-base: "Inter", "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --font-weight-light: 300;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --line-height-relaxed: 1.7;
+
+            /* Spacing */
+            --space-4: 4px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+            --space-64: 64px;
+
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 12px 35px rgba(0, 0, 0, 0.15);
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --gradient-secondary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            --gradient-danger: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            --gradient-warning: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            
+            /* Animation */
+            --duration-fast: 0.15s;
+            --duration-normal: 0.25s;
+            --duration-slow: 0.4s;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            font-family: var(--font-family-base);
+            line-height: var(--line-height-normal);
+            color: var(--color-text);
+        }
+
+        body {
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 90% 10%, rgba(45, 166, 178, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Splash Screen */
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeOut var(--duration-slow) ease-in-out 2s forwards;
+        }
+
+        .splash-logo {
+            font-size: 3rem;
+            font-weight: var(--font-weight-bold);
+            color: white;
+            margin-bottom: var(--space-16);
+            opacity: 0;
+            animation: fadeInUp var(--duration-slow) var(--ease-bounce) 0.3s forwards;
+        }
+
+        .splash-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-32);
+            opacity: 0;
+            animation: fadeInUp var(--duration-slow) var(--ease-bounce) 0.6s forwards;
+        }
+
+        .splash-loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            animation: fadeIn var(--duration-slow) ease-in-out 2.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fillBar {
+            from {
+                width: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Header */
+        .header {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: var(--space-16) 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-20);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: var(--font-weight-bold);
+            color: white;
+            text-align: center;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-32) var(--space-20);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: var(--space-48);
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-16);
+            line-height: var(--line-height-tight);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: var(--line-height-relaxed);
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-xl);
+            padding: var(--space-32);
+            margin-bottom: var(--space-32);
+            transition: all var(--duration-normal) var(--ease-standard);
+            transform: translateY(0);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-semibold);
+            color: white;
+            margin-bottom: var(--space-24);
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+        }
+
+        .card-icon {
+            font-size: 1.3rem;
+        }
+
+        /* Form Styles */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--space-24);
+            margin-bottom: var(--space-32);
+        }
+
+        @media (min-width: 768px) {
+            .form-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .form-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-16);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all var(--duration-fast) var(--ease-standard);
+        }
+
+        .form-group:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .form-group:focus-within {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(50, 184, 198, 0.5);
+            box-shadow: 0 0 0 2px rgba(50, 184, 198, 0.2);
+        }
+
+        .form-group.success {
+            border-color: rgba(50, 184, 198, 0.6);
+            background: rgba(50, 184, 198, 0.05);
+        }
+
+        .form-group.success .form-label::after {
+            content: '✓';
+            color: #32b8c6;
+            margin-left: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group.error {
+            border-color: rgba(255, 84, 89, 0.6);
+            background: rgba(255, 84, 89, 0.05);
+            animation: shake 0.3s ease-in-out;
+        }
+
+        .form-group.error .form-label {
+            color: rgba(255, 84, 89, 1);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+
+        .form-label {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-8);
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+
+        .form-input, .form-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-md);
+            padding: var(--space-12) var(--space-16);
+            font-size: var(--font-size-base);
+            color: white;
+            transition: all var(--duration-fast) var(--ease-standard);
+            min-height: 44px;
+        }
+
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: rgba(50, 184, 198, 0.8);
+            box-shadow: 0 0 0 3px rgba(50, 184, 198, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23ffffff'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right var(--space-12) center;
+            background-size: 16px;
+            padding-right: var(--space-48);
+        }
+
+        .form-select option {
+            background: var(--color-slate-900);
+            color: white;
+        }
+
+        /* Error States */
+        .form-input.error, .form-select.error {
+            border-color: rgba(255, 84, 89, 0.8);
+            background: rgba(255, 84, 89, 0.1);
+        }
+
+        .error-message {
+            color: rgba(255, 84, 89, 1);
+            font-size: var(--font-size-xs);
+            margin-top: var(--space-8);
+            padding: var(--space-4) var(--space-8);
+            background: rgba(255, 84, 89, 0.1);
+            border: 1px solid rgba(255, 84, 89, 0.3);
+            border-radius: var(--radius-sm);
+            display: none;
+            animation: slideInDown var(--duration-fast) var(--ease-standard);
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            color: rgba(50, 184, 198, 1);
+            font-size: var(--font-size-xs);
+            margin-top: var(--space-8);
+            padding: var(--space-4) var(--space-8);
+            background: rgba(50, 184, 198, 0.1);
+            border: 1px solid rgba(50, 184, 198, 0.3);
+            border-radius: var(--radius-sm);
+            display: none;
+            animation: slideInDown var(--duration-fast) var(--ease-standard);
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Prevention Strategies Styling */
+        .prevention-section {
+            margin-top: var(--space-24);
+            padding: var(--space-20);
+            background: rgba(50, 184, 198, 0.1);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(50, 184, 198, 0.3);
+        }
+
+        .prevention-strategies {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-12);
+        }
+
+        .prevention-strategies > div {
+            animation: slideInUp 0.4s ease-out;
+        }
+
+        /* Enhanced Form Progress - Floating Design */
+        .form-progress-container {
+            position: fixed;
+            bottom: var(--space-24);
+            right: var(--space-24);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            padding: var(--space-20);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: var(--shadow-xl);
+            min-width: 280px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all var(--duration-normal) var(--ease-standard);
+        }
+        
+        .form-progress-container.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .form-progress-container.completed {
+            background: rgba(17, 153, 142, 0.9);
+            border-color: rgba(56, 239, 125, 0.4);
+        }
+
+        .form-progress-text {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: var(--font-size-sm);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-12);
+            font-weight: var(--font-weight-medium);
+        }
+        
+        .progress-icon {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+            font-size: var(--font-size-base);
+        }
+        
+        .progress-percentage {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-lg);
+        }
+
+        .form-progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .form-progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+            border-radius: var(--radius-full);
+            transition: width 0.6s var(--ease-standard);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        .progress-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--space-12);
+            font-size: var(--font-size-xs);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .progress-status {
+            display: flex;
+            align-items: center;
+            gap: var(--space-6);
+        }
+        
+        .progress-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: var(--font-size-lg);
+            padding: var(--space-4);
+            border-radius: var(--radius-sm);
+            transition: all var(--duration-fast) var(--ease-standard);
+        }
+        
+        .progress-close:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        /* Loading States */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-xl);
+            z-index: 1000;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: white;
+        }
+
+        .loading-content .spinner {
+            width: 40px;
+            height: 40px;
+            border-width: 3px;
+            margin-bottom: var(--space-16);
+        }
+
+        /* Button Styles */
+        .btn {
+            background: var(--gradient-success);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            padding: var(--space-16) var(--space-32);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-8);
+            min-height: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left var(--duration-slow) var(--ease-standard);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-full {
+            width: 100%;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none;
+            animation: slideInUp var(--duration-slow) var(--ease-bounce);
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .prediction-result {
+            text-align: center;
+            padding: var(--space-32);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-24);
+        }
+
+        .prediction-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-16);
+        }
+
+        .prediction-text {
+            font-size: 2rem;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-8);
+        }
+
+        .prediction-probability {
+            font-size: 1.2rem;
+            margin-bottom: var(--space-16);
+        }
+
+        .risk-level {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-medium);
+            gap: var(--space-8);
+        }
+
+        .risk-high {
+            background: rgba(255, 84, 89, 0.2);
+            color: rgba(255, 84, 89, 1);
+            border: 1px solid rgba(255, 84, 89, 0.4);
+        }
+
+        .risk-medium {
+            background: rgba(230, 129, 97, 0.2);
+            color: rgba(230, 129, 97, 1);
+            border: 1px solid rgba(230, 129, 97, 0.4);
+        }
+
+        .risk-low {
+            background: rgba(50, 184, 198, 0.2);
+            color: rgba(50, 184, 198, 1);
+            border: 1px solid rgba(50, 184, 198, 0.4);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin: var(--space-16) 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: var(--radius-full);
+            transition: width var(--duration-slow) var(--ease-standard);
+        }
+
+        /* XAI Section */
+        .xai-section {
+            margin-top: var(--space-24);
+        }
+
+        .xai-title {
+            font-size: 1.3rem;
+            font-weight: var(--font-weight-semibold);
+            color: white;
+            margin-bottom: var(--space-20);
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+        }
+
+        .feature-importance {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-12);
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-12) var(--space-16);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+            transition: background var(--duration-fast) var(--ease-standard);
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-name {
+            font-weight: var(--font-weight-medium);
+            color: white;
+        }
+
+        .feature-value {
+            font-size: var(--font-size-sm);
+            color: rgba(255, 255, 255, 0.8);
+            margin: var(--space-4) 0;
+        }
+
+        .impact-bar {
+            width: 120px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-full);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-fill {
+            height: 100%;
+            border-radius: var(--radius-full);
+            transition: width var(--duration-normal) var(--ease-standard);
+        }
+
+        .impact-positive {
+            background: linear-gradient(90deg, #11998e, #38ef7d);
+        }
+
+        .impact-negative {
+            background: linear-gradient(90deg, #ff416c, #ff4b2b);
+        }
+
+        /* File Upload */
+        .upload-section {
+            margin-top: var(--space-32);
+            padding: var(--space-24);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-lg);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            text-align: center;
+            transition: all var(--duration-fast) var(--ease-standard);
+        }
+
+        .upload-section:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .upload-section.dragover {
+            background: rgba(50, 184, 198, 0.2);
+            border-color: rgba(50, 184, 198, 0.8);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: var(--space-16);
+        }
+
+        .upload-text {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: var(--space-16);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: var(--space-12) var(--space-16);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-16);
+            display: none;
+            animation: slideInDown var(--duration-fast) var(--ease-standard);
+        }
+
+        .status-message.show {
+            display: block;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .status-success {
+            background: rgba(50, 184, 198, 0.2);
+            color: rgba(50, 184, 198, 1);
+            border: 1px solid rgba(50, 184, 198, 0.4);
+        }
+
+        .status-error {
+            background: rgba(255, 84, 89, 0.2);
+            color: rgba(255, 84, 89, 1);
+            border: 1px solid rgba(255, 84, 89, 0.4);
+        }
+
+        .status-warning {
+            background: rgba(230, 129, 97, 0.2);
+            color: rgba(230, 129, 97, 1);
+            border: 1px solid rgba(230, 129, 97, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: var(--space-32) 0;
+            color: rgba(255, 255, 255, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: var(--space-64);
+        }
+
+        .footer p {
+            margin-bottom: var(--space-8);
+        }
+
+        /* Mobile responsiveness for progress indicator */
+        @media (max-width: 768px) {
+            .form-progress-container {
+                bottom: var(--space-16);
+                right: var(--space-16);
+                left: var(--space-16);
+                min-width: unset;
+                padding: var(--space-16);
+            }
+            
+            .form-progress-text {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-8);
+            }
+            
+            .progress-details {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-8);
+            }
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: var(--space-16);
+            }
+
+            .glass-card {
+                padding: var(--space-20);
+                margin-bottom: var(--space-20);
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-16);
+            }
+
+            .form-group {
+                padding: var(--space-12);
+            }
+
+            .card-title {
+                font-size: 1.3rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-8);
+            }
+
+            .prediction-text {
+                font-size: 1.5rem;
+            }
+
+            .prediction-icon {
+                font-size: 3rem;
+            }
+
+            .splash-logo {
+                font-size: 2rem;
+            }
+
+            .splash-subtitle {
+                font-size: 1rem;
+                padding: 0 var(--space-20);
+            }
+
+            .feature-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-8);
+            }
+
+            .impact-bar {
+                width: 100%;
+                margin-top: var(--space-8);
+            }
+
+            .form-progress-container {
+                bottom: var(--space-12);
+                right: var(--space-12);
+                left: var(--space-12);
+                padding: var(--space-12);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 1.4rem;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .container {
+                padding: var(--space-12);
+            }
+
+            .glass-card {
+                padding: var(--space-16);
+            }
+
+            .form-grid {
+                gap: var(--space-12);
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        .btn:focus-visible,
+        .form-input:focus-visible,
+        .form-select:focus-visible {
+            outline: 2px solid rgba(50, 184, 198, 0.8);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <h1 class="splash-logo">
+            <i class="fas fa-chart-line"></i>
+            Bank Churn Predictor
+        </h1>
+        <p class="splash-subtitle">AI-Powered Customer Analytics for Modern Banking</p>
+        <div class="splash-loader"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="header-title">
+                    <i class="fas fa-university"></i>
+                    Bank Churn Predictor
+                </h1>
+            </div>
+        </header>
+
+        <!-- Container -->
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1 class="hero-title">Predict Customer Churn with AI</h1>
+                <p class="hero-subtitle">
+                    Leverage advanced machine learning algorithms to identify customers at risk of leaving your bank. 
+                    Make data-driven decisions to improve customer retention and drive business growth.
+                </p>
+            </section>
+
+            <!-- Status Messages -->
+            <div id="statusMessage" class="status-message"></div>
+
+            <!-- Prediction Form -->
+            <div class="glass-card">
+                <h2 class="card-title">
+                    <i class="fas fa-user-circle card-icon"></i>
+                    Customer Information
+                </h2>
+                
+                <form id="predictionForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label" for="creditScore">
+                                <i class="fas fa-credit-card"></i>
+                                Credit Score *
+                            </label>
+                            <input type="number" id="creditScore" name="CreditScore" class="form-input" 
+                                   min="300" max="850" required placeholder="Enter credit score (300-850)">
+                            <div class="error-message" id="creditScoreError">Credit score must be between 300 and 850</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="geography">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Geography *
+                            </label>
+                            <select id="geography" name="Geography" class="form-select" required>
+                                <option value="" disabled selected>Choose country...</option>
+                                <option value="France">France</option>
+                                <option value="Germany">Germany</option>
+                                <option value="Spain">Spain</option>
+                            </select>
+                            <div class="error-message" id="geographyError">Please select a geography</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="gender">
+                                <i class="fas fa-user"></i>
+                                Gender *
+                            </label>
+                            <select id="gender" name="Gender" class="form-select" required>
+                                <option value="" disabled selected>Choose gender...</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <div class="error-message" id="genderError">Please select a gender</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="age">
+                                <i class="fas fa-birthday-cake"></i>
+                                Age *
+                            </label>
+                            <input type="number" id="age" name="Age" class="form-input" 
+                                   min="18" max="100" required placeholder="Enter age (18-100)">
+                            <div class="error-message" id="ageError">Age must be between 18 and 100</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="tenure">
+                                <i class="fas fa-clock"></i>
+                                Tenure (Years) *
+                            </label>
+                            <input type="number" id="tenure" name="Tenure" class="form-input" 
+                                   min="0" max="10" required placeholder="Years with bank (0-10)">
+                            <div class="error-message" id="tenureError">Tenure must be between 0 and 10 years</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="balance">
+                                <i class="fas fa-piggy-bank"></i>
+                                Account Balance *
+                            </label>
+                            <input type="number" id="balance" name="Balance" class="form-input" 
+                                   min="0" step="0.01" required placeholder="Enter account balance ($)">
+                            <div class="error-message" id="balanceError">Balance must be 0 or greater</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="numOfProducts">
+                                <i class="fas fa-shopping-cart"></i>
+                                Number of Products *
+                            </label>
+                            <input type="number" id="numOfProducts" name="NumOfProducts" class="form-input" 
+                                   min="1" max="4" required placeholder="Products owned (1-4)">
+                            <div class="error-message" id="numOfProductsError">Number of products must be between 1 and 4</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="hasCrCard">
+                                <i class="fas fa-credit-card"></i>
+                                Has Credit Card *
+                            </label>
+                            <select id="hasCrCard" name="HasCrCard" class="form-select" required>
+                                <option value="" disabled selected>Choose option...</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div class="error-message" id="hasCrCardError">Please select an option</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="isActiveMember">
+                                <i class="fas fa-user-check"></i>
+                                Is Active Member *
+                            </label>
+                            <select id="isActiveMember" name="IsActiveMember" class="form-select" required>
+                                <option value="" disabled selected>Choose option...</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div class="error-message" id="isActiveMemberError">Please select an option</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="estimatedSalary">
+                                <i class="fas fa-money-bill-wave"></i>
+                                Estimated Salary *
+                            </label>
+                            <input type="number" id="estimatedSalary" name="EstimatedSalary" class="form-input" 
+                                   min="0" step="0.01" required placeholder="Enter estimated salary ($)">
+                            <div class="error-message" id="estimatedSalaryError">Salary must be 0 or greater</div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-full" id="predictBtn">
+                        <i class="fas fa-magic"></i>
+                        Predict Customer Churn
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section">
+                <div class="glass-card">
+                    <h2 class="card-title">
+                        <i class="fas fa-chart-pie card-icon"></i>
+                        Prediction Results
+                    </h2>
+
+                    <div class="prediction-result" id="predictionResult">
+                        <div style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.7);">
+                            <i class="fas fa-chart-line" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; color: #32b8c6;"></i>
+                            <h3 style="color: rgba(255, 255, 255, 0.8); margin-bottom: 0.5rem;">Ready for Prediction</h3>
+                            <p style="margin-bottom: 1rem;">Fill out the customer information form above and click "Predict Customer Churn" to see AI-powered results here.</p>
+                            <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; flex-wrap: wrap; font-size: 0.8rem; opacity: 0.6;">
+                                <span><i class="fas fa-check"></i> Churn Probability</span>
+                                <span><i class="fas fa-lightbulb"></i> AI Explanations</span>
+                                <span><i class="fas fa-shield-alt"></i> Action Recommendations</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- XAI Section -->
+                    <div class="xai-section" id="xaiSection" style="display: none;">
+                        <h3 class="xai-title">
+                            <i class="fas fa-lightbulb"></i>
+                            Why This Prediction?
+                        </h3>
+                        <div class="feature-importance" id="featureImportance">
+                            <!-- Feature importance will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Prevention Strategies Section -->
+                    <div class="prevention-section" id="preventionSection" style="display: none;">
+                        <h3 class="xai-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Recommended Actions
+                        </h3>
+                        <div class="prevention-strategies" id="preventionStrategies">
+                            <!-- Prevention strategies will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Batch Upload Section -->
+            <div class="glass-card">
+                <h2 class="card-title">
+                    <i class="fas fa-upload card-icon"></i>
+                    Batch Prediction
+                </h2>
+                
+                <div class="upload-section" id="uploadSection">
+                    <div class="upload-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <p class="upload-text">
+                        Drop your CSV file here or click to browse
+                    </p>
+                    <input type="file" id="fileInput" class="file-input" accept=".csv">
+                    <button type="button" class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i>
+                        Choose File
+                    </button>
+                    <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin-top: 1rem;">
+                        Upload a CSV file with customer data for batch predictions
+                    </p>
+                </div>
+
+                <div id="batchResults" style="display: none; margin-top: 1.5rem;">
+                    <!-- Batch results will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>&copy; 2025 Bank Churn Predictor. Powered by Advanced Machine Learning.</p>
+                <p>Built with modern web technologies for optimal performance and accessibility.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Configuration
+        const API_BASE_URL = 'http://localhost:5000';
+        
+        // Global variables for state management
+        let currentPrediction = null;
+        let isLoading = false;
+        let currentFormData = {};
+
+        // Splash screen control
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove splash screen after 2 seconds
+            setTimeout(() => {
+                const splashScreen = document.getElementById('splashScreen');
+                if (splashScreen) {
+                    splashScreen.style.display = 'none';
+                }
+            }, 2500);
+        });
+
+        // Enhanced form validation
+        function validateField(field) {
+            const value = field.value.trim();
+            const fieldName = field.name;
+            const errorElement = document.getElementById(fieldName.toLowerCase() + 'Error');
+            const formGroup = field.closest('.form-group');
+            
+            let isValid = true;
+            let errorMessage = '';
+
+            // Clear previous states
+            field.classList.remove('error');
+            formGroup?.classList.remove('error', 'success');
+            if (errorElement) {
+                errorElement.classList.remove('show');
+            }
+
+            // Check if required field is empty
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                errorMessage = 'This field is required';
+            }
+            
+            // Specific validations
+            else if (fieldName === 'CreditScore' && value) {
+                const score = parseInt(value);
+                if (isNaN(score) || score < 300 || score > 850) {
+                    isValid = false;
+                    errorMessage = 'Credit score must be between 300 and 850';
+                }
+            }
+            else if (fieldName === 'Age' && value) {
+                const age = parseInt(value);
+                if (isNaN(age) || age < 18 || age > 100) {
+                    isValid = false;
+                    errorMessage = 'Age must be between 18 and 100';
+                }
+            }
+            else if (fieldName === 'Tenure' && value) {
+                const tenure = parseInt(value);
+                if (isNaN(tenure) || tenure < 0 || tenure > 10) {
+                    isValid = false;
+                    errorMessage = 'Tenure must be between 0 and 10 years';
+                }
+            }
+            else if ((fieldName === 'Balance' || fieldName === 'EstimatedSalary') && value) {
+                const amount = parseFloat(value);
+                if (isNaN(amount) || amount < 0) {
+                    isValid = false;
+                    errorMessage = 'Amount must be 0 or greater';
+                }
+            }
+            else if (fieldName === 'NumOfProducts' && value) {
+                const products = parseInt(value);
+                if (isNaN(products) || products < 1 || products > 4) {
+                    isValid = false;
+                    errorMessage = 'Number of products must be between 1 and 4';
+                }
+            }
+            else if ((fieldName === 'Geography' || fieldName === 'Gender' || fieldName === 'HasCrCard' || fieldName === 'IsActiveMember') && !value) {
+                isValid = false;
+                errorMessage = 'Please select an option';
+            }
+
+            // Show error or success state
+            if (!isValid) {
+                field.classList.add('error');
+                formGroup?.classList.add('error');
+                if (errorElement) {
+                    errorElement.textContent = errorMessage;
+                    errorElement.classList.add('show');
+                }
+            } else if (value && field.hasAttribute('required')) {
+                formGroup?.classList.add('success');
+            }
+
+            return isValid;
+        }
+
+        // Validate entire form
+        function validateForm(form) {
+            let isValid = true;
+            const formElements = form.querySelectorAll('input, select');
+            
+            formElements.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Enhanced real-time validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const formElements = document.querySelectorAll('#predictionForm input, #predictionForm select');
+            
+            formElements.forEach(field => {
+                // Validate on blur (when user leaves field)
+                field.addEventListener('blur', () => validateField(field));
+                
+                // Validate on input for immediate feedback
+                field.addEventListener('input', () => {
+                    // Clear error state immediately when user starts typing
+                    if (field.classList.contains('error')) {
+                        const errorElement = document.getElementById(field.name.toLowerCase() + 'Error');
+                        field.classList.remove('error');
+                        field.closest('.form-group')?.classList.remove('error');
+                        if (errorElement) {
+                            errorElement.classList.remove('show');
+                        }
+                    }
+                    
+                    // Validate after a short delay
+                    clearTimeout(field.validationTimeout);
+                    field.validationTimeout = setTimeout(() => {
+                        if (field.value.trim()) {
+                            validateField(field);
+                        }
+                    }, 500);
+                });
+                
+                // Validate selects immediately on change
+                if (field.tagName === 'SELECT') {
+                    field.addEventListener('change', () => validateField(field));
+                }
+            });
+            
+            // Add form submission count for better UX
+            let submissionCount = 0;
+            const form = document.getElementById('predictionForm');
+            const originalSubmitHandler = form.onsubmit;
+            
+            // Add progress indicator
+            function updateFormProgress() {
+                const totalFields = formElements.length;
+                const validFields = Array.from(formElements).filter(field => {
+                    return field.value.trim() && !field.classList.contains('error');
+                }).length;
+                
+                const progress = (validFields / totalFields) * 100;
+                const progressBar = document.querySelector('.form-progress-bar');
+                if (progressBar) {
+                    progressBar.style.width = progress + '%';
+                }
+            }
+            
+            // Add floating progress indicator
+            const progressContainer = document.createElement('div');
+            progressContainer.className = 'form-progress-container';
+            progressContainer.innerHTML = `
+                <div class="form-progress-text">
+                    <div class="progress-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Form Progress</span>
+                    </div>
+                    <span class="progress-percentage">0%</span>
+                </div>
+                <div class="form-progress-bar">
+                    <div class="form-progress-bar-fill" style="width: 0%;"></div>
+                </div>
+                <div class="progress-details">
+                    <div class="progress-status">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="progress-message">Complete all fields to enable AI prediction</span>
+                    </div>
+                    <button class="progress-close" type="button" title="Hide progress">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(progressContainer);
+            
+            // Enhanced floating progress update function
+            function updateFormProgress() {
+                const totalFields = formElements.length;
+                const validFields = Array.from(formElements).filter(field => {
+                    return field.value.trim() && !field.classList.contains('error');
+                }).length;
+                
+                const progress = (validFields / totalFields) * 100;
+                const progressContainer = document.querySelector('.form-progress-container');
+                const progressBarFill = document.querySelector('.form-progress-bar-fill');
+                const progressPercentage = document.querySelector('.progress-percentage');
+                const progressMessage = document.querySelector('.progress-message');
+                const predictBtn = document.getElementById('predictBtn');
+                
+                // Show/hide progress container based on form interaction
+                if (validFields > 0 && !progressContainer.classList.contains('show')) {
+                    progressContainer.classList.add('show');
+                }
+                
+                if (progressBarFill) {
+                    progressBarFill.style.width = progress + '%';
+                }
+                
+                if (progressPercentage) {
+                    progressPercentage.textContent = Math.round(progress) + '%';
+                }
+                
+                // Update progress message
+                if (progressMessage) {
+                    if (progress === 100) {
+                        progressMessage.innerHTML = '<i class="fas fa-check"></i> Ready for AI prediction!';
+                        progressContainer.classList.add('completed');
+                    } else if (progress >= 75) {
+                        progressMessage.innerHTML = '<i class="fas fa-battery-three-quarters"></i> Almost complete...';
+                        progressContainer.classList.remove('completed');
+                    } else if (progress >= 50) {
+                        progressMessage.innerHTML = '<i class="fas fa-battery-half"></i> Halfway there!';
+                        progressContainer.classList.remove('completed');
+                    } else if (progress >= 25) {
+                        progressMessage.innerHTML = '<i class="fas fa-battery-quarter"></i> Making progress...';
+                        progressContainer.classList.remove('completed');
+                    } else {
+                        progressMessage.innerHTML = '<i class="fas fa-info-circle"></i> Complete all fields to enable AI prediction';
+                        progressContainer.classList.remove('completed');
+                    }
+                }
+                
+                // Enable/disable predict button based on form completion
+                if (predictBtn) {
+                    if (progress === 100) {
+                        predictBtn.disabled = false;
+                        predictBtn.style.opacity = '1';
+                        predictBtn.innerHTML = '<i class="fas fa-magic"></i> Predict Customer Churn';
+                    } else {
+                        predictBtn.disabled = true;
+                        predictBtn.style.opacity = '0.6';
+                        predictBtn.innerHTML = `<i class="fas fa-form"></i> Complete Form (${Math.round(progress)}%)`;
+                    }
+                }
+            }
+            
+            // Handle progress close button
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.progress-close')) {
+                    const progressContainer = document.querySelector('.form-progress-container');
+                    progressContainer.classList.remove('show');
+                }
+            });
+            
+            // Auto-hide progress after successful prediction
+            function hideProgressIndicator() {
+                setTimeout(() => {
+                    const progressContainer = document.querySelector('.form-progress-container');
+                    if (progressContainer) {
+                        progressContainer.classList.remove('show');
+                    }
+                }, 3000);
+            }
+            
+            // Update progress on field changes
+            formElements.forEach(field => {
+                field.addEventListener('input', updateFormProgress);
+                field.addEventListener('change', updateFormProgress);
+                field.addEventListener('blur', updateFormProgress);
+            });
+            
+            updateFormProgress();
+        });
+
+        // Show status message
+        function showStatusMessage(message, type = 'info') {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.className = `status-message status-${type} show`;
+            statusElement.textContent = message;
+            
+            // Auto-hide after 5 seconds for non-error messages
+            if (type !== 'error') {
+                setTimeout(() => {
+                    statusElement.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        // Hide status message
+        function hideStatusMessage() {
+            const statusElement = document.getElementById('statusMessage');
+            statusElement.classList.remove('show');
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Get risk level and color
+        function getRiskInfo(probability) {
+            if (probability >= 0.7) {
+                return {
+                    level: 'High Risk',
+                    class: 'risk-high',
+                    icon: 'fas fa-exclamation-triangle',
+                    color: '#ff5459'
+                };
+            } else if (probability >= 0.4) {
+                return {
+                    level: 'Medium Risk',
+                    class: 'risk-medium',
+                    icon: 'fas fa-exclamation-circle',
+                    color: '#e68161'
+                };
+            } else {
+                return {
+                    level: 'Low Risk',
+                    class: 'risk-low',
+                    icon: 'fas fa-check-circle',
+                    color: '#32b8c6'
+                };
+            }
+        }
+
+        // Prevention strategies mapping
+        const preventionStrategies = {
+            'Age': 'Implement personalized retention programs and special benefits for older customers.',
+            'Balance': 'Offer premium services and dedicated relationship managers for high-balance customers.',
+            'CreditScore': 'Provide financial counseling and flexible payment options for customers with lower credit scores.',
+            'EstimatedSalary': 'Offer wealth management and exclusive perks for high-earning customers.',
+            'Geography': 'Tailor products to local market needs and regional preferences.',
+            'NumOfProducts': 'Cross-sell additional products to increase customer engagement and stickiness.',
+            'Tenure': 'Reward long-tenure customers with loyalty bonuses and special recognition programs.',
+            'IsActiveMember': 'Launch re-engagement campaigns and personalized offers for inactive members.',
+            'HasCrCard': 'Enhance rewards programs and cashback incentives for credit card holders.',
+            'Gender': 'Consider gender-specific marketing and product preferences in retention strategies.'
+        };
+
+        // Display prediction results with enhanced features
+        function displayResults(data) {
+            const resultsSection = document.getElementById('resultsSection');
+            const predictionResult = document.getElementById('predictionResult');
+            const featureImportance = document.getElementById('featureImportance');
+            const preventionSection = document.getElementById('preventionSection');
+            const preventionStrategiesEl = document.getElementById('preventionStrategies');
+            
+            // Show results section
+            resultsSection.classList.add('show');
+            
+            // Prepare prediction data
+            const willChurn = data.prediction === 1;
+            const probability = data.probability;
+            const riskInfo = getRiskInfo(probability);
+            
+            // Display main prediction with enhanced UI
+            predictionResult.innerHTML = `
+                <div class="prediction-icon" style="color: ${riskInfo.color};">
+                    <i class="${riskInfo.icon}"></i>
+                </div>
+                <div class="prediction-text" style="color: ${riskInfo.color};">
+                    Customer ${willChurn ? 'Will Churn' : 'Will Stay'}
+                </div>
+                <div class="prediction-probability" style="color: rgba(255, 255, 255, 0.9);">
+                    Prediction Confidence: ${(probability * 100).toFixed(1)}%
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="background: ${riskInfo.color}; width: ${probability * 100}%; transition: width 1s ease-in-out;"></div>
+                </div>
+                <div class="risk-level ${riskInfo.class}">
+                    <i class="${riskInfo.icon}"></i>
+                    ${riskInfo.level}
+                </div>
+                ${willChurn ? 
+                    '<div style="margin-top: 1rem; padding: 1rem; background: rgba(255, 84, 89, 0.1); border-radius: 8px; border: 1px solid rgba(255, 84, 89, 0.3);"><strong style="color: #ff5459;">⚠️ Action Required:</strong> <span style="color: rgba(255, 255, 255, 0.9);">This customer is at risk of churning. Review recommended strategies below.</span></div>' : 
+                    '<div style="margin-top: 1rem; padding: 1rem; background: rgba(50, 184, 198, 0.1); border-radius: 8px; border: 1px solid rgba(50, 184, 198, 0.3);"><strong style="color: #32b8c6;">✅ Good News:</strong> <span style="color: rgba(255, 255, 255, 0.9);">This customer is likely to stay. Continue providing excellent service!</span></div>'
+                }
+            `;
+            
+            // Display feature importance if available
+            if (data.xai_explanations && data.xai_explanations.length > 0) {
+                const xaiSection = document.getElementById('xaiSection');
+                xaiSection.style.display = 'block';
+                
+                featureImportance.innerHTML = data.xai_explanations.slice(0, 5).map((feature, index) => {
+                    const isPositive = feature.impact > 0;
+                    const impactPercentage = Math.abs(feature.impact) * 100;
+                    
+                    return `
+                        <div class="feature-item" style="animation: slideInUp 0.3s ease-out ${index * 0.1}s both;">
+                            <div>
+                                <div class="feature-name">${feature.feature}</div>
+                                <div class="feature-value">Value: ${typeof feature.value === 'number' ? feature.value.toLocaleString() : feature.value}</div>
+                            </div>
+                            <div>
+                                <div class="impact-bar">
+                                    <div class="impact-fill ${isPositive ? 'impact-positive' : 'impact-negative'}" 
+                                         style="width: ${Math.min(impactPercentage, 100)}%; animation: fillBar 0.8s ease-out ${index * 0.1 + 0.3}s both;"></div>
+                                </div>
+                                <div style="font-size: 0.8rem; color: ${isPositive ? '#38ef7d' : '#ff4b2b'}; text-align: right; margin-top: 4px;">
+                                    ${isPositive ? '+' : ''}${(feature.impact * 100).toFixed(1)}%
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Show prevention strategies
+                preventionSection.style.display = 'block';
+                const topFeatures = data.xai_explanations.slice(0, 3);
+                const strategies = topFeatures.map(feature => {
+                    const strategy = preventionStrategies[feature.feature];
+                    return strategy ? `
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px; margin-bottom: 0.5rem; border-left: 4px solid #32b8c6;">
+                            <strong style="color: #32b8c6;">${feature.feature}:</strong>
+                            <span style="color: rgba(255, 255, 255, 0.9);">${strategy}</span>
+                        </div>
+                    ` : '';
+                }).filter(Boolean).join('');
+                
+                preventionStrategiesEl.innerHTML = strategies || `
+                    <div style="text-align: center; padding: 1rem; color: rgba(255, 255, 255, 0.7);">
+                        <p>Continue monitoring customer behavior and maintain excellent service quality.</p>
+                    </div>
+                `;
+            } else {
+                document.getElementById('xaiSection').style.display = 'none';
+                document.getElementById('preventionSection').style.display = 'none';
+            }
+            
+            // Scroll to results with smooth animation
+            setTimeout(() => {
+                resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+
+        // Handle form submission
+        document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (isLoading) return;
+            
+            // Enhanced form validation
+            if (!validateForm(this)) {
+                showStatusMessage('⚠️ Please fix the errors in the form before submitting', 'error');
+                
+                // Scroll to first error
+                const firstError = this.querySelector('.form-group.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+            
+            // Prepare form data
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                // Convert numeric fields
+                if (['CreditScore', 'Age', 'Tenure', 'Balance', 'NumOfProducts', 'HasCrCard', 'IsActiveMember', 'EstimatedSalary'].includes(key)) {
+                    data[key] = parseFloat(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            currentFormData = data;
+            
+            // Enhanced loading state
+            const predictBtn = document.getElementById('predictBtn');
+            const originalText = predictBtn.innerHTML;
+            const loadingMessages = [
+                '🔄 Processing with AI...',
+                '📊 Analyzing patterns...',
+                '🔍 Evaluating features...',
+                '⚙️ Generating insights...'
+            ];
+            
+            let messageIndex = 0;
+            predictBtn.innerHTML = `<div class="spinner"></div> ${loadingMessages[messageIndex]}`;
+            predictBtn.disabled = true;
+            isLoading = true;
+            
+            // Cycle through loading messages
+            const loadingInterval = setInterval(() => {
+                messageIndex = (messageIndex + 1) % loadingMessages.length;
+                if (isLoading) {
+                    predictBtn.innerHTML = `<div class="spinner"></div> ${loadingMessages[messageIndex]}`;
+                } else {
+                    clearInterval(loadingInterval);
+                }
+            }, 800);
+            
+            // Add loading overlay to form
+            const formCard = this.closest('.glass-card');
+            const loadingOverlay = document.createElement('div');
+            loadingOverlay.className = 'loading-overlay';
+            loadingOverlay.innerHTML = `
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 1rem;">AI is analyzing customer data...</p>
+                </div>
+            `;
+            formCard.style.position = 'relative';
+            formCard.appendChild(loadingOverlay);
+            
+            // Hide previous results and status
+            document.getElementById('resultsSection').classList.remove('show');
+            hideStatusMessage();
+            
+            try {
+                showStatusMessage('Processing prediction...', 'warning');
+                
+                const response = await fetch(`${API_BASE_URL}/predict`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status} - ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                currentPrediction = result;
+                
+                // Display results
+                displayResults(result);
+                showStatusMessage('Prediction completed successfully!', 'success');
+                hideProgressIndicator();
+                
+            } catch (error) {
+                console.error('Prediction error:', error);
+                let errorMessage = 'Failed to get prediction. ';
+                
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage += 'Please make sure the backend server is running on http://localhost:5000';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                showStatusMessage(errorMessage, 'error');
+            } finally {
+                // Enhanced cleanup
+                const formCard = document.querySelector('.glass-card');
+                const loadingOverlay = formCard?.querySelector('.loading-overlay');
+                if (loadingOverlay) {
+                    loadingOverlay.remove();
+                }
+                
+                predictBtn.innerHTML = originalText;
+                predictBtn.disabled = false;
+                isLoading = false;
+                
+                // Update form progress to reset button state
+                updateFormProgress();
+            }
+        });
+
+        // File upload handling
+        const fileInput = document.getElementById('fileInput');
+        const uploadSection = document.getElementById('uploadSection');
+        const batchResults = document.getElementById('batchResults');
+
+        // Drag and drop handlers
+        uploadSection.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadSection.classList.add('dragover');
+        });
+
+        uploadSection.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadSection.classList.remove('dragover');
+        });
+
+        uploadSection.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadSection.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                handleFileUpload(files[0]);
+            }
+        });
+
+        // File input change handler
+        fileInput.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                handleFileUpload(e.target.files[0]);
+            }
+        });
+
+        // Handle file upload
+        async function handleFileUpload(file) {
+            if (!file.name.toLowerCase().endsWith('.csv')) {
+                showStatusMessage('Please upload a CSV file', 'error');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            // Show processing state
+            batchResults.style.display = 'block';
+            batchResults.innerHTML = `
+                <div style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.9);">
+                    <div class="spinner" style="margin: 0 auto 1rem;"></div>
+                    <p>Processing batch predictions...</p>
+                </div>
+            `;
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/batch_predict`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+                
+                const results = await response.json();
+                displayBatchResults(results);
+                showStatusMessage('Batch prediction completed successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Batch prediction error:', error);
+                batchResults.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: rgba(255, 84, 89, 0.9);">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                        <p>Failed to process batch predictions</p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Please check your CSV format and try again</p>
+                    </div>
+                `;
+                showStatusMessage('Batch prediction failed. Please check the CSV format.', 'error');
+            }
+        }
+
+        // Display batch results
+        function displayBatchResults(results) {
+            if (!results || !Array.isArray(results) || results.length === 0) {
+                batchResults.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: rgba(255, 255, 255, 0.7);">
+                        <p>No results to display</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const churnCount = results.filter(r => r.prediction === 1).length;
+            const totalCount = results.length;
+            const churnRate = ((churnCount / totalCount) * 100).toFixed(1);
+            
+            batchResults.innerHTML = `
+                <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+                    <h3 style="color: white; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-chart-bar"></i>
+                        Batch Results Summary
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; text-align: center;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: white;">${totalCount}</div>
+                            <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">Total Customers</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #ff5459;">${churnCount}</div>
+                            <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">Will Churn</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #32b8c6;">${totalCount - churnCount}</div>
+                            <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">Will Stay</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #e68161;">${churnRate}%</div>
+                            <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">Churn Rate</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="max-height: 300px; overflow-y: auto; background: rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1rem;">
+                    <div style="display: grid; grid-template-columns: 1fr 100px 80px; gap: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255, 255, 255, 0.2); margin-bottom: 0.5rem; font-weight: 600; color: white;">
+                        <div>Customer</div>
+                        <div>Prediction</div>
+                        <div>Confidence</div>
+                    </div>
+                    ${results.map((result, index) => {
+                        const willChurn = result.prediction === 1;
+                        const confidence = (result.probability * 100).toFixed(1);
+                        const riskInfo = getRiskInfo(result.probability);
+                        
+                        return `
+                            <div style="display: grid; grid-template-columns: 1fr 100px 80px; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); align-items: center;">
+                                <div style="color: rgba(255, 255, 255, 0.9);">Customer ${index + 1}</div>
+                                <div style="color: ${riskInfo.color}; font-weight: 500;">
+                                    ${willChurn ? 'Churn' : 'Stay'}
+                                </div>
+                                <div style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
+                                    ${confidence}%
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // Initialize tooltips and other interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling to all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Add keyboard navigation support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    hideStatusMessage();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
